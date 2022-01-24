@@ -19,7 +19,7 @@ describe('Cat Facts API', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
-                    res.body.length.should.be.eq(4);
+                    res.body.length.should.be.eq(5);
                 done();
             })
         })
@@ -39,7 +39,7 @@ describe('Cat Facts API', () => {
      */
     describe('PUT /cat/facts/:id', () => {
         it('Should update a fact with given id', (done) => {
-            const id = 2;
+            const id = 1;
             const data = {
                 text: 'this is testing the put method'
             };
@@ -54,7 +54,7 @@ describe('Cat Facts API', () => {
         })
 
         it('Should not update a fact', (done) => {
-            const id = 1;
+            const id = 100;
             chai.request(app)
                 .put('/cat/facts/' + id)
                 .end((err, res) => {
@@ -70,7 +70,7 @@ describe('Cat Facts API', () => {
      */
     describe('DELETE /cat/facts/:id', () => {
         it('Should delete a fact with given id', (done) => {
-            const id = 2;
+            const id = 1;
             chai.request(app)
                 .delete('/cat/facts/' + id)
                 .end((err, res) => {
@@ -81,7 +81,7 @@ describe('Cat Facts API', () => {
         })
 
         it('Should not delete a fact', (done) => {
-            const id = 1;
+            const id = 100;
             chai.request(app)
                 .delete('/cat/facts/' + id)
                 .end((err, res) => {
