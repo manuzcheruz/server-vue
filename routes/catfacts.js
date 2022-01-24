@@ -37,10 +37,12 @@ router.put(
     const { text } = req.body;
     const currentTime = new Date().toISOString();
     try {
-      const updateFact = await pool.query(
+      const updatedFact = await pool.query(
         'UPDATE cat_facts SET textDescription = $1, updatedAt = $2 WHERE id = $3',
         [text, currentTime, id]);
-      res.json('fact was successfully updated!');
+      if (updatedFact.rowCount) {
+        res.json('fact was successfully updated!');
+      } else res.status(404).json('fact with the given id does not exist!');
     } catch (err) {
       res.send(err);
       next(err);
@@ -53,10 +55,12 @@ router.delete(
   async (req, res, next) => {
     const { id } = req.params;
     try {
-      const updateFact = await pool.query(
+      const deletedFact = await pool.query(
         'DELETE FROM cat_factS WHERE id = $1',
         [id]);
-      res.json('fact was successfully deleted!');
+      if (deletedFact.rowCount) {
+        res.json('fact was successfully deleted!');
+      } else res.status(404).json('fact with the given id does not exist!');
     } catch (err) {
       res.send(err);
       next(err);
