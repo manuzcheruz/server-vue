@@ -2,11 +2,13 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index.js';
 
-//Assertion style
 chai.should();
 
 chai.use(chaiHttp);
 
+/**
+ * Grouped tests for the facts api, targeting a test db 
+ */
 describe('Cat Facts API', () => {
 
     /**

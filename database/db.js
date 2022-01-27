@@ -1,11 +1,12 @@
 import pg from 'pg';
+import config from '../config.js';
 
 const pool = new pg.Pool({
-    user: 'kipkemoi',
-    password: '',
-    database: 'cat_facts_database',
-    host: 'localhost',
-    port: 5432
+    user: config.username,
+    password: config.password,
+    database: config.database,
+    host: config.host,
+    port: config.db_port
 });
 
 export default pool;

@@ -7,7 +7,6 @@ const functions = {
   getListFromAPI: async function () {
     const path = '/facts';
     let data = [];
-    let error;
 
     try {
       const res = await fetch(`${config.source.url}${path}`, {
@@ -20,13 +19,11 @@ const functions = {
       })
       data = await res.json();
     } catch (err) {
-      error = err;
-      console.log('Some error!');
       throw err;
     }
   
     // Return response from external API
-    return { data, error };
+    return { data };
   }
 }
 
